@@ -37,13 +37,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   iniciarSesion(): void {
-    this.router.navigateByUrl('/usuario/login');
+    this.router.navigateByUrl('/login/iniciar');
   }
 
   cerrarSesion(): void {
     this.localService.clearToken();
     this.sesion.logueado.next(false);
-    this.router.navigateByUrl('/usuario/login');
+    this.router.navigateByUrl('/login/iniciar');
     /*this.router.navigateByUrl('/usuario/listar', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/usuario/login']);
     });*/
@@ -84,16 +84,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subs.complete();
   }
 
-  irUsuarios() {
-    this.router.navigateByUrl('/usuario/listar_usuario');
+  irListas() {
+    this.router.navigateByUrl('/lista/listar');
   }
 
-  irConsultar() {
-    this.router.navigateByUrl('/usuario/consultar_deuda');
-  }
-
-  irCargar() {
-    this.router.navigateByUrl('/usuario/cargar_archivo');
+  irCrear() {
+    this.router.navigateByUrl('/lista/crear');
   }
 
 }

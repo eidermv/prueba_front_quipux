@@ -11,7 +11,7 @@
 
         <div class="col-12 d-flex justify-content-center">
           <mat-form-field appearance="outline">
-            <mat-label>Correo</mat-label>
+            <mat-label>Usuario</mat-label>
             <input matInput placeholder="Placeholder" [formControl]="this.controls.usuario">
             <!--          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
             <mat-hint>Hint</mat-hint>-->
@@ -38,7 +38,7 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="centrar">
-      <button mat-flat-button color="primary" [disabled]="this.usuarioForm.invalid" [matTooltip]="'Guardar Tercero'" (click)="guardar()"><mat-icon>done</mat-icon> Aceptar</button>
+      <button mat-flat-button color="primary" [disabled]="this.usuarioForm.invalid" [matTooltip]="'Iniciar Sesion'" (click)="guardar()"><mat-icon>done</mat-icon> Iniciar Sesion</button>
     </div>
   </mat-card-actions>
 </mat-card>

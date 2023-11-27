@@ -39,8 +39,8 @@ export class PeticionInterceptor implements HttpInterceptor {
     });
     // para refresh token -3, "Usuario no autorizado"
     return next.handle(headers).pipe(
-      catchError((err: HttpErrorResponse) => {
-        if (err && err.status === 401) {
+      catchError((error: HttpErrorResponse) => {
+        if (error && error.status === 401) {
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -48,29 +48,28 @@ export class PeticionInterceptor implements HttpInterceptor {
             timer: 3000,
             timerProgressBar: true,
             didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
             }
           });
 
-          if (err.error.error === -3) {
-            if (err.error.mensaje === 'Usuario no autorizado') {
-              console.log('==============> de token: ');
-              return this.sesionService.refreshAuth().pipe(
-                take(1),
-                switchMap((resp: any) => {
-                  if (resp.error.toString() === '0') {
-                    Toast.fire({
-                      icon: 'success',
-                      title: 'Sesion se refresco con exito'
-                    });
-                    this.sesionService.setLocalAuthKey(resp.key);
-                    this.localService.setJsonValue('logueado', 'true');
-                    this.sesionService.guardarDatos(resp.data);
-                    this.sesionService.logueado.next(true);
+          if (error.error.error === -3 && error.error.mensaje === 'Usuario no autorizado') {
+            console.log('==============> de token: ');
+            return this.sesionService.refreshAuth().pipe(
+              take(1),
+              switchMap( (resp: any) => {
+                if (resp.error.toString() === '0') {
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Sesion se refresco con exito'
+                  });
+                  this.sesionService.setLocalAuthKey(resp.key);
+                  this.localService.setJsonValue('logueado', 'true');
+                  this.sesionService.guardarDatos(resp.data);
+                  this.sesionService.logueado.next(true);
 
 
-                    let auth2 = this.cargarToken(request);
+                  const auth2 = this.cargarToken(request);
 
                     const headers2 = request.clone({
                       headers: request.headers.set('Content-Type', 'application/json').set('Authorization', auth2)
@@ -88,52 +87,7 @@ export class PeticionInterceptor implements HttpInterceptor {
                   }
                   return resp;
                 })
-              );/*.subscribe(
-              (resp: any) => {
-
-                if (resp.error.toString() === '0') {
-                  Toast.fire({
-                    icon: 'success',
-                    title: 'Sesion se refresco con exito'
-                  });
-                  this.sesionService.setLocalAuthKey(resp.key);
-                  this.localService.setJsonValue('logueado', 'true');
-                  this.sesionService.guardarDatos(resp.data);
-                  this.sesionService.logueado.next(true);
-
-
-                  let auth2 = this.cargarToken(request);
-
-                  const headers2 = request.clone({
-                    headers: request.headers.set('Content-Type', 'application/json').set('Authorization', auth2)
-                  });
-                  // console.log('|||||===---> ENTRA AQUI |||||||');
-                  return next.handle(headers2);
-
-
-                } else {
-                  Toast.fire({
-                    icon: 'error',
-                    title: 'Sesion no se refresco y se cerrara sesion'
-                  });
-                  this.cerrarSesion();
-                }
-
-            },
-              error => {
-                Toast.fire({
-                  icon: 'error',
-                  title: 'Sesion no se refresco y se cerrara sesion'
-                });
-                this.cerrarSesion();
-              });*/
-            } else {
-              Toast.fire({
-                icon: 'error',
-                title: 'Sesion no se refresco y se cerrara sesion'
-              });
-              this.cerrarSesion();
-            }
+              );
           } else {
             Toast.fire({
               icon: 'error',
@@ -144,7 +98,7 @@ export class PeticionInterceptor implements HttpInterceptor {
 
 
         }
-        throw err;
+        throw error;
       })
     );
   }
@@ -152,7 +106,7 @@ export class PeticionInterceptor implements HttpInterceptor {
   private cerrarSesion(){
     this.localService.clearToken();
     this.sesionService.logueado.next(false);
-    this.router.navigateByUrl('/usuario/login');
+    this.router.navigateByUrl('/login/iniciar');
   }
 
   private cargarToken(request: any) {

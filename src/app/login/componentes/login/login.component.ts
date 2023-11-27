@@ -61,14 +61,14 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
 
     if (this.sesion.logueado.value) {
-      this.router.navigateByUrl('/usuario/listar_usuario');
+      this.router.navigateByUrl('/lista/listar');
     } else {
       this.router.navigateByUrl('/login/iniciar');
     }
   }
 
   volver(): void{
-    this.router.navigateByUrl('/usuario/listar_usuario');
+    this.router.navigateByUrl('/lista/listar');
   }
 
   guardar(): void {
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         timer: 1500
       });
       this.authService.login().subscribe({
-      next: (valor)=> {
+      next:(valor)=>{
         Swal.fire({
           title: 'Validando!',
           html: 'Por favor espere.',
@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
                 showConfirmButton: false,
                 timer: 1500
               });
-              this.router.navigateByUrl('/usuario/listar_usuario');
+              this.router.navigateByUrl('/lista/listar');
               this.sesion.setLocalAuthKey(valor.key);
               this.localService.setJsonValue('logueado', 'true');
               this.sesion.guardarDatos(valor.data);

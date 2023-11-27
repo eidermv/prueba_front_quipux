@@ -320,17 +320,13 @@
         <mat-icon>more_vert</mat-icon> Menu
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="irUsuarios()">
+        <button mat-menu-item (click)="irListas()">
           <mat-icon>group</mat-icon>
-          <span>Gestión Usuarios</span>
+          <span>Listas</span>
         </button>
-        <button mat-menu-item (click)="irConsultar()">
-          <mat-icon>search</mat-icon>
-          <span>Consultar Deudas</span>
-        </button>
-        <button mat-menu-item (click)="irCargar()">
-          <mat-icon>cloud_upload</mat-icon>
-          <span>Cargar Archivo</span>
+        <button mat-menu-item (click)="irCrear()">
+          <mat-icon>post_add</mat-icon>
+          <span>Crear</span>
         </button>
         <button mat-menu-item class="warn" (click)="cerrarSesion()">
           <mat-icon>logout</mat-icon>
