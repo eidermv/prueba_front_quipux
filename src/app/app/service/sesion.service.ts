@@ -41,6 +41,6 @@ export class SesionService {
       'Authorization': 'Bearer 1',
     });
     let options = { headers: headers };
-    return this.httpClient.put(environment.apiUrl+'usuario/refreshAuth', null, options);
+    return this.httpClient.put(environment.apiUrl+'auth/refreshAuth', null, options);
   }
 }

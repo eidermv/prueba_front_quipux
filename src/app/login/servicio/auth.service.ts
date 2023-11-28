@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 
 @Injectable({
@@ -12,10 +12,10 @@ export class AuthService {
   ) { }
 
   login() {
-    /*let headers = new HttpHeaders({
+    let headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    let options = { headers: headers };*/
-    return this.http.post<any>(environment.apiUrl+'auth/login', null);
+    let options = { headers: headers };
+    return this.http.get<any>(environment.apiUrl+'auth/login', options);
   }
 }

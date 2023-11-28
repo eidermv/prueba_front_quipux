@@ -77,7 +77,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.usuarioForm.valid) {
       const usuario = {usuario: this.controls.usuario.value, contrasena: this.controls.contrasena.value};
       let pass = environment.origin + " " ;
-      pass += btoa(JSON.stringify(usuario));
+      // pass += btoa(JSON.stringify(usuario));
+      pass += btoa(this.controls.usuario.value+":"+this.controls.contrasena.value);
       this.sesion.setLocalAuthKey(pass);
       Swal.fire({
         position: 'top-end',
@@ -104,6 +105,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         }).then((result) => {
           /* Read more about handling dismissals below */
           if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("--------------------->1 " + valor);
             if (valor.error === 0) {
               Swal.fire({
                 icon: 'success',
