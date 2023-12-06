@@ -11,6 +11,7 @@ export class ListaContenedorService {
 
   public listas = new BehaviorSubject<Lista[]>([]);
   public cancionesLista = new BehaviorSubject<Cancion[]>([]);
+  public generos = new BehaviorSubject<string[]>([]);
 
 
   public resultadoInsert = new BehaviorSubject(new Respuesta());

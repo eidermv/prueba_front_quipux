@@ -17,13 +17,17 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from "@angular/material/dialog";
+import { ReactiveFormsModule } from "@angular/forms";
+import { CrearListaCancionesComponent } from './componentes/crear-lista-canciones/crear-lista-canciones.component';
+import { MatSelectModule } from "@angular/material/select";
 
 
 @NgModule({
   declarations: [
     ListarComponent,
     CrearComponent,
-    ListarCancionesComponent
+    ListarCancionesComponent,
+    CrearListaCancionesComponent
   ],
     imports: [
         CommonModule,
@@ -38,7 +42,9 @@ import { MatDialogModule } from "@angular/material/dialog";
         MatPaginatorModule,
         MatInputModule,
         MatSortModule,
-        MatDialogModule
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatSelectModule
     ]
 })
 export class ListaModule { }

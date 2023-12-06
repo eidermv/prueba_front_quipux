@@ -1,0 +1,82 @@
+<mat-card class="example-card">
+  <mat-card-header class="d-flex justify-content-center">
+    <mat-card-title><h2>Agregar Canción</h2></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <form class="" [formGroup]="formGroup">
+
+      <div class="row">
+
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="outline">
+            <mat-label>Titulo</mat-label>
+            <input matInput placeholder="Placeholder" [formControl]="this.controls.titulo" required>
+            <!--          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>-->
+            <mat-error *ngIf="this.controls.titulo.invalid">{{this.mnsErrorTitulo}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="outline">
+            <mat-label>Artista</mat-label>
+            <input matInput placeholder="Placeholder" [formControl]="this.controls.artista">
+            <!--          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>-->
+            <mat-error *ngIf="this.controls.artista.invalid">{{this.mnsErrorArtista}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="outline">
+            <mat-label>Album</mat-label>
+            <input matInput placeholder="Placeholder" [formControl]="this.controls.album">
+            <!--          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>-->
+            <mat-error *ngIf="this.controls.album.invalid">{{this.mnsErrorAlbum}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="outline">
+            <mat-label>Año</mat-label>
+            <input type="number" matInput placeholder="Placeholder" [formControl]="this.controls.anio">
+            <!--          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>-->
+            <mat-error *ngIf="this.controls.anio.invalid">{{this.mnsErrorAnio}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Genero</mat-label>
+            <mat-select [formControl]="this.controls.genero" required (valueChange)="valorGenero($event)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let genero of generos|async; trackBy: generoId" [value]="genero">
+                {{genero}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="this.controls.genero.invalid">{{this.mnsErrorGenero}}
+            </mat-error>
+            <mat-hint style="color: forestgreen"
+                      *ngIf="this.controls.genero.valid && this.controls.genero.value!==''">
+              <mat-icon>verified</mat-icon> Correcto
+            </mat-hint>
+            <mat-icon matSuffix>list_alt</mat-icon>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </form>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="centrar">
+      <button mat-mini-fab color="primary" [disabled]="this.formGroup.invalid" [matTooltip]="'Guardar Lista'" (click)="guardar()"><mat-icon>save</mat-icon></button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+
+
+
