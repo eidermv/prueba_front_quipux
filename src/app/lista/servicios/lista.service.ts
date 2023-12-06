@@ -131,4 +131,33 @@ export class ListaService {
       }
     );
   }
+
+  crearLista(lista: any) {
+    return this.http.post(environment.apiUrl + 'lists', lista).pipe(take(1));
+  }
+
+  listarGeneros() {
+    let generos: string[] = [];
+    this.http.get(environment.apiUrl + 'lists/generos').pipe(take(1)).subscribe( {
+    next: (data: any) => {
+        if (data.generos.length > 0) {
+          generos = data.generos;
+        } else {
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'No se obtuvo generos',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      },
+      error: error => {
+        console.log(error);
+      },
+      complete: () => {
+        this.contenedor.generos.next(generos);
+      }
+  });
+  }
 }

@@ -1,1 +1,47 @@
-<p>crear works!</p>
+<mat-card class="example-card">
+  <mat-card-header class="d-flex justify-content-center">
+    <mat-card-title><h2>Crear Deuda</h2></mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="aling-izq">
+      <button mat-button color="primary" [matTooltip]="'Volver Atras'" (click)="volver()"><mat-icon>arrow_back</mat-icon></button>
+    </div>
+
+    <form class="" [formGroup]="formGroup">
+
+      <div class="row">
+
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Placeholder" [formControl]="this.controls.nombre" required>
+            <!--          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>-->
+            <mat-error *ngIf="this.controls.nombre.invalid">{{this.mnsErrorNombre}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 d-flex justify-content-center">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripcion</mat-label>
+            <input matInput placeholder="Placeholder" [formControl]="this.controls.descripcion" required>
+            <!--          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Hint</mat-hint>-->
+            <mat-error *ngIf="this.controls.descripcion.invalid">{{this.mnsErrorDescripcion}}</mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </form>
+    <app-crear-lista-canciones (listaCanciones)="eventoCancion($event)"></app-crear-lista-canciones>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="centrar">
+      <button mat-mini-fab color="primary" [disabled]="this.formGroup.invalid" [matTooltip]="'Guardar Lista'" (click)="guardar()"><mat-icon>save</mat-icon></button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+
+

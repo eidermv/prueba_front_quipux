@@ -17,13 +17,6 @@ const routes: Routes = [
     data: {
       title: 'Crear lista '
     }
-  },
-  {
-    path: 'listar_canciones',
-    component: CrearComponent,
-    data: {
-      title: 'Listar canciones '
-    }
   }
 ];
 
