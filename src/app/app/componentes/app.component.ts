@@ -12,7 +12,7 @@ import { Login } from "../../login/modelo/login";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'front-deuda';
+  title = 'front-lista';
 
   private subs: ReplaySubject<void> = new ReplaySubject();
   public logueado = false;
