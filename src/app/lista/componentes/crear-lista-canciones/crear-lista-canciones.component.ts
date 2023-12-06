@@ -8,6 +8,8 @@ import { Router } from "@angular/router";
 import Swal from "sweetalert2";
 import { takeUntil } from "rxjs/operators";
 import { Cancion } from "../../modelo/cancion";
+import { ListarCancionesComponent } from "../listar-canciones/listar-canciones.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-crear-lista-canciones',
@@ -72,7 +74,8 @@ export class CrearListaCancionesComponent implements OnInit, OnDestroy, AfterVie
   constructor(
     private fb: FormBuilder,
     private servicio: ListaService,
-    private contenedor: ListaContenedorService
+    private contenedor: ListaContenedorService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -95,13 +98,19 @@ export class CrearListaCancionesComponent implements OnInit, OnDestroy, AfterVie
       cancion.titulo =  typeof this.controls.titulo.value === "string" ? this.controls.titulo.value :'';
       cancion.artista =  typeof this.controls.artista.value === "string" ? this.controls.artista.value :'';
       cancion.album =  typeof this.controls.album.value === "string" ? this.controls.album.value :'';
-      cancion.anno =  typeof this.controls.anio.value === "string" ? Number(this.controls.anio.value) :0;
+      cancion.anno =  typeof this.controls.anio.value === "number" ? Number(this.controls.anio.value) :0;
       cancion.genero =  typeof this.controls.genero.value === "string" ? this.controls.genero.value :'';
 
       this.canciones.push(cancion);
       this.evento.emit(this.canciones)
 
       this.formGroup.reset();
+
+      this.contenedor.cancionesLista.next(this.canciones);
+      const dialogRef = this.dialog.open(ListarCancionesComponent, {
+        width: '500px',
+        data: {}
+      });
     }
   }
 
@@ -173,6 +182,14 @@ export class CrearListaCancionesComponent implements OnInit, OnDestroy, AfterVie
   ngOnDestroy(): void {
     this.subs.next();
     this.subs.complete();
+  }
+
+  listarCanciones() {
+    this.contenedor.cancionesLista.next(this.canciones);
+    const dialogRef = this.dialog.open(ListarCancionesComponent, {
+      width: '500px',
+      data: {}
+    });
   }
 
 }

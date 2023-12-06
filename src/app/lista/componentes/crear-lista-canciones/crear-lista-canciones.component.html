@@ -75,6 +75,9 @@
     <div class="centrar">
       <button mat-mini-fab color="primary" [disabled]="this.formGroup.invalid" [matTooltip]="'Guardar Lista'" (click)="guardar()"><mat-icon>save</mat-icon></button>
     </div>
+    <div class="centrar">
+      <button mat-mini-fab color="primary" [matTooltip]="'Lista Canciones'" (click)="listarCanciones()"><mat-icon>playlist_play</mat-icon></button>
+    </div>
   </mat-card-actions>
 </mat-card>
 

@@ -124,7 +124,7 @@ export class ListarComponent implements OnInit, OnDestroy {
       case 3:
         Swal.fire({
           title: 'Estas seguro?',
-          text: 'Deseas eliminar el chiste ' + data.id_favorito + ' ' + data.chiste,
+          text: 'Deseas eliminar la lista ' + data.nombre + ' ' + data.descripcion,
           icon: 'warning',
           showClass: {
             popup: 'animate__animated animate__fadeInDown'

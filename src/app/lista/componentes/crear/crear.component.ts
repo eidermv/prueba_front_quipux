@@ -40,7 +40,7 @@ export class CrearComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private subs: ReplaySubject<void> = new ReplaySubject();
 
-  private lista: Lista;
+  private lista: Lista = new Lista();
 
   constructor(
     private fb: FormBuilder,
@@ -54,6 +54,7 @@ export class CrearComponent implements OnInit, OnDestroy, AfterViewInit {
       nombre: this.controls.nombre,
       descripcion: this.controls.descripcion
     });
+    this.lista = new Lista();
   }
 
 
